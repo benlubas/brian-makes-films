@@ -1,17 +1,56 @@
 <html>
   <style>
     body {
-      background: red;
+      background: #212121;
+      color: white;
       transition: 0.25s ease;
+    }
+    .input-group {
+      padding: 10px;
+      font-size: 1.3rem;
     }
   </style>
 
-  <body></body>
+  <body>
+    <div class="ui">
+      <h2>
+        Hey man, pick your colors. Then hit space. <br />
+        It takes 5 second for the color to switch. Then it switches back 5
+        seconds later.
+      </h2>
+      <div class="input-group">
+        Red:
+        <input onchange="redChange(this.value)" type="color" id="red" />
+      </div>
+      <div class="input-group">
+        Green:
+        <input onchange="greenChange(this.value)" type="color" id="green" />
+      </div>
+    </div>
+  </body>
 
   <script>
-    setTimeout(
-      () => (document.querySelector("body").style.background = "green"),
-      5000
-    );
+    const greenChange = (v) => {
+      GREEN = v;
+    };
+    const redChange = (v) => {
+      RED = v;
+    };
+    let GREEN = "#00ff00";
+    let RED = "#ff0000";
+    document.addEventListener("keydown", (e) => {
+      e.key === " " ? play() : null;
+    });
+    const play = () => {
+      document.querySelector("body").style.background = RED;
+      document.querySelector(".ui").style.display = "none";
+      setTimeout(() => {
+        document.querySelector("body").style.background = GREEN;
+        setTimeout(
+          () => (document.querySelector("body").style.background = RED),
+          5000
+        );
+      }, 5000);
+    };
   </script>
 </html>
